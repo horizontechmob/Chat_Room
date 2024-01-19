@@ -1,0 +1,62 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+
+<h1>Home template</h1>
+
+<style>
+    .home-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+    }
+</style>
+
+<style>
+
+
+</style>
+    
+<div class = "home-container">
+    
+<div>
+    
+<h3> Brows Topics </h3> 
+
+<hr>
+
+<div>
+    {% for topic in topics%}
+    
+    <div>
+        <a href="{% url 'home' %}?q={{ topic.name }}"> {{ topic.name }} </a>
+
+    </div>
+
+    {% endfor %}
+</div>
+
+</div>
+
+    <div>
+
+        <h5>{{room_count}} rooms available</h5>
+    <a href="{% url  'create-room' %}">Create Room</a><br>
+    {% for room in rooms %}
+    <div>
+        <h5>
+            <a href = "{% url 'delete-room' room.id %}">Delete</a><br><br>
+            <a href = "{% url 'update-room' room.id %}">Update</a><br><br>
+            <span>@{{room.host.username}}</span><br><br>
+            {{room.id}} -- <a href="{% url 'room' room.id %}">{{room.name}}</a><br><br>
+            <small>{{room.topic.name}}</small><br>
+            <hr>
+        </h5>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+{% endblock content %}
